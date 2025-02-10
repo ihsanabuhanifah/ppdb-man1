@@ -15,7 +15,8 @@ use App\Http\Controllers\{
     TesDiniyyahController,
     TesMasukController,
     KelulusanController,
-    WaControllers
+    WaControllers,
+    FileUploadController
 };
 use App\Http\Controllers\admin\{
     UserController,
@@ -53,6 +54,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('/authme', [AuthController::class ,'authMe']);
 // tes mail
 Route::put('/update-profile', [UserController::class, "updateProfile"]);
+Route::post('/upload/profile', [FileUploadController::class, 'foto_profile']);
 Route::get('/detail', [UserController::class, "detail"]);
 Route::get('/tesMail/{email}', [AuthController::class ,'tesMail']);
 //Fitur admin

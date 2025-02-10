@@ -12,6 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+
     use HasRoles, HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -19,6 +20,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+
+
     protected $fillable = [
        'name',
         'email',
@@ -78,7 +82,20 @@ class User extends Authenticatable
         "kab_kota",
         "provinsi",
         "is_lulus" ,
-        "is_tes"
+        "is_tes",
+        "nomor_pendaftaran",
+        "jalur_seleksi",
+        "is_locked",
+        "nama_prestasi1",
+        "nama_prestasi2",
+        "nama_prestasi3",
+        "tingkat1",
+        "tingkat2",
+        "tingkat3",
+        "juara_ke_1",
+        "juara_ke_2",
+        "juara_ke_3",
+        "dokumen_prestasi"
 
 
     ];

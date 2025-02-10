@@ -163,6 +163,7 @@ $user->update([
 
     // Data Pribadi
     'jenis_kelamin' => $request->jenis_kelamin,
+    'jalur_seleksi' => $request->jalur_seleksi,
     'nisn' => $request->nisn,
     'nik' => $request->nik,
     'tempat_lahir' => $request->tempat_lahir,
@@ -225,6 +226,19 @@ $user->update([
     'foto_kks' => $request->foto_kks ?? $user->foto_kks,
     'foto_pkh' => $request->foto_pkh ?? $user->foto_pkh,
     'foto_kip' => $request->foto_kip ?? $user->foto_kip,
+
+    // prestasi
+
+    'nama_prestasi1' => $request->nama_prestasi1,
+    'nama_prestasi2' => $request->nama_prestasi2,
+    'nama_prestasi3' => $request->nama_prestasi3,
+
+    'juara_ke_1' => $request->juara_ke_1,
+    'juara_ke_2' => $request->juara_ke_2,
+    'juara_ke_3' => $request->juara_ke_3,
+    'tingkat1' => $request->tingkat1,
+    'tingkat2' => $request->tingkat2,
+    'tingkat3' => $request->tingkat3,
 ]);
 
 return response()->json([

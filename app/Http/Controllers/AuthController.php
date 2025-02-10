@@ -193,14 +193,28 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('token-name')->plainTextToken;
+        $user = User::where('email',$request->email)->first();
+        $nomor_pendaftaran = "PPDBMAN1KSI2526-" . str_pad($user->id, 4, '0', STR_PAD_LEFT);
+        $user-> update([
+            'nomor_pendaftaran' =>  $nomor_pendaftaran,
+        ]);
 
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Berhasil Membuat Akun',
-            'role' => $role,
-            'user' => $user,
-            'token' => $token,
-        ], 200);
+        if($user -> save()){
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Berhasil Membuat Akun',
+                'role' => $role,
+                'user' => $user,
+                'token' => $token,
+            ], 200);
+        }else{
+            return response()->json([
+                "status" => "failed",
+                "message" => 'Pendaftaran gagal'
+            ]);
+        }
+
+
     }
 
 

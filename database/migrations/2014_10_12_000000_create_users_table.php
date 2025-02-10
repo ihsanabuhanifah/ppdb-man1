@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_pendaftaran')->nullable();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
@@ -78,6 +79,7 @@ class CreateUsersTable extends Migration
             $table->string('nomor_wali')->nullable();
 
             // kartu2
+            $table->string('jalur_seleksi')->nullable();
             $table->string('nomor_kks')->nullable();
             $table->string('nomor_pkh')->nullable();
             $table->string('nomor_kip')->nullable();
@@ -87,6 +89,21 @@ class CreateUsersTable extends Migration
             $table->string('foto_kip')->nullable();
             $table->string('is_lulus')->nullable();
             $table->string('is_tes')->nullable();
+            $table->string('is_locked')->nullable();
+
+            //prestasi
+
+            $table->string('nama_prestasi1')->nullable();
+            $table->string('nama_prestasi2')->nullable();
+            $table->string('nama_prestasi3')->nullable();
+
+            $table->string('juara_ke_1')->nullable();
+            $table->string('juara_ke_2')->nullable();
+            $table->string('juara_ke_3')->nullable();
+            $table->string('tingkat1')->nullable();
+            $table->string('tingkat2')->nullable();
+            $table->string('tingkat3')->nullable();
+            $table->string('dokumen_prestasi')->nullable();
 
 
             $table->timestamps();
