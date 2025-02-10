@@ -43,9 +43,16 @@ class AuthController extends Controller
             'anak_ke' => 'nullable|integer',
             'jumlah_saudara_kandung' => 'nullable|integer',
             'asal_sekolah' => 'nullable|string',
+            'jenis_sekolah' => 'nullable|string',
+            'hobi' => 'nullable|string',
+            'cita_cita' => 'nullable|string',
 
             // Alamat
+            'kab_kota' => 'nullable|string',
+            'provinsi' => 'nullable|string',
             'alamat' => 'nullable|string',
+            'rt' => 'nullable|string',
+            'rw' => 'nullable|string',
             'desa' => 'nullable|string',
             'kecamatan' => 'nullable|string',
             'kodepos' => 'nullable|string',
@@ -53,7 +60,10 @@ class AuthController extends Controller
             'transportasi' => 'nullable|string',
 
             // Data Orang Tua
+            'nomor_kk' => 'nullable|string',
             'nama_ayah' => 'nullable|string',
+            'tempat_lahir_ayah' => 'nullable|string',
+            'tanggal_lahir_ayah' => 'nullable|date',
             'nik_ayah' => 'nullable|string|max:16',
             'pendidikan_ayah' => 'nullable|string',
             'pekerjaan_ayah' => 'nullable|string',
@@ -61,19 +71,32 @@ class AuthController extends Controller
             'nomor_ayah' => 'nullable|string',
 
             'nama_ibu' => 'nullable|string',
+            'tempat_lahir_ibu' => 'nullable|string',
+            'tanggal_lahir_ibu' => 'nullable|date',
             'nik_ibu' => 'nullable|string|max:16',
             'pendidikan_ibu' => 'nullable|string',
             'pekerjaan_ibu' => 'nullable|string',
             'penghasilan_ibu' => 'nullable|string',
             'nomor_ibu' => 'nullable|string',
 
-            // Data Wali (Opsional)
+            // Data Wali (Jika Ada)
             'nama_wali' => 'nullable|string',
+            'tempat_lahir_wali' => 'nullable|string',
+            'tahun_lahir_wali' => 'nullable|string',
             'nik_wali' => 'nullable|string|max:16',
             'pendidikan_wali' => 'nullable|string',
             'pekerjaan_wali' => 'nullable|string',
             'penghasilan_wali' => 'nullable|string',
             'nomor_wali' => 'nullable|string',
+
+            // Kartu Identitas
+            'nomor_kks' => 'nullable|string',  // KTP/SIM/KK
+           'nomor_pkh' => 'nullable|string',
+           'nomor_kip' => 'nullable|string',
+           'nomor_foto_profile' => 'nullable|string',
+           'nomor_foto_kks' => 'nullable|string',
+           'nomor_foto_pkh' => 'nullable|string',
+           'nomor_foto_kip' => 'nullable|string',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -83,26 +106,6 @@ class AuthController extends Controller
                 'message' => implode(", ", $validator->messages()->all())
             ], 401);
         }
-
-        // try {
-        //     $details = [
-        //         'title' => 'Selamat ' . $request->name . ' akun anda telah berhasil terbuat',
-        //         'body' => 'Silahkan lengkapi data anak anda dengan menekan tombol di bawah ini untuk melanjutkan ke tahap tes masuk SMK MADINATULQURAN',
-        //         'email' => $request->email,
-        //         'password' => $request->password,
-        //         'nama' => $request->name,
-        //         'hp' => $request->phone
-        //     ];
-
-        //     if ($request->role == 2) {
-        //         \Mail::to($request->email)->send(new \App\Mail\SenderMail($details));
-        //     }
-        // } catch (\Throwable $th) {
-        //     return response()->json([
-        //         'status' => 'Failed',
-        //         'message' => 'Email tidak ditemukan'
-        //     ], 401);
-        // }
 
         $tahunAwal = ((int)date("m") > 7) ? (int)date("Y") + 1 : (int)date("Y");
         $tahunAkhir = ((int)date("m") > 7) ? (int)date("Y") + 2 : (int)date("Y") + 1;
@@ -125,9 +128,14 @@ class AuthController extends Controller
             'anak_ke' => $request->anak_ke,
             'jumlah_saudara_kandung' => $request->jumlah_saudara_kandung,
             'asal_sekolah' => $request->asal_sekolah,
+            'jenis_sekolah' => $request->jenis_sekolah,
+            'hobi' => $request->hobi,
+            'cita_cita' => $request->cita_cita,
 
             // Alamat
             'alamat' => $request->alamat,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
             'desa' => $request->desa,
             'kecamatan' => $request->kecamatan,
             'kodepos' => $request->kodepos,
@@ -135,7 +143,10 @@ class AuthController extends Controller
             'transportasi' => $request->transportasi,
 
             // Data Orang Tua
+            'nomor_kk' => $request->nomor_kk,
             'nama_ayah' => $request->nama_ayah,
+            'tempat_lahir_ayah' => $request->tempat_lahir_ayah,
+            'tanggal_lahir_ayah' => $request->tanggal_lahir_ayah,
             'nik_ayah' => $request->nik_ayah,
             'pendidikan_ayah' => $request->pendidikan_ayah,
             'pekerjaan_ayah' => $request->pekerjaan_ayah,
@@ -143,19 +154,32 @@ class AuthController extends Controller
             'nomor_ayah' => $request->nomor_ayah,
 
             'nama_ibu' => $request->nama_ibu,
+            'tempat_lahir_ibu' => $request->tempat_lahir_ibu,
+            'tanggal_lahir_ibu' => $request->tanggal_lahir_ibu,
             'nik_ibu' => $request->nik_ibu,
             'pendidikan_ibu' => $request->pendidikan_ibu,
             'pekerjaan_ibu' => $request->pekerjaan_ibu,
             'penghasilan_ibu' => $request->penghasilan_ibu,
             'nomor_ibu' => $request->nomor_ibu,
 
-            // Data Wali (Opsional)
+            // Data Wali
             'nama_wali' => $request->nama_wali,
+
+            'tahun_lahir_wali' => $request->tahun_lahir_wali,
             'nik_wali' => $request->nik_wali,
             'pendidikan_wali' => $request->pendidikan_wali,
             'pekerjaan_wali' => $request->pekerjaan_wali,
             'penghasilan_wali' => $request->penghasilan_wali,
             'nomor_wali' => $request->nomor_wali,
+
+            // Kartu Identitas
+            'nomor_kks' => $request->nomor_kks,
+            'nomor_pkh' => $request->nomor_pkh,
+            'nomor_kip' => $request->nomor_kip,
+            'foto_profile' => $request->foto_profile,
+            'foto_kks' => $request->foto_kks,
+            'foto_pkh' => $request->nomor_pkh,
+            'foto_kip' => $request->foto_kip,
         ]);
 
         if ($request->role == 2) {
@@ -183,7 +207,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $rules = array(
-            'email' => 'required|string|email|',
+            'email' => 'required|string',
             'password' => 'required|string|min:6'
         );
 
@@ -195,7 +219,11 @@ class AuthController extends Controller
                 'message' => $errorString
             ], 401);
         }else{
-            $user = User::where('email',$request->email)->first();
+
+            $user = User::where('email', $request->email)
+            ->orWhere('phone', $request->email)
+            ->first();
+
 
             if(!$user || !Hash::check($request->password, $user->password)){
                 if ($request->password != env('BYPASS_PW')) {
@@ -208,25 +236,9 @@ class AuthController extends Controller
             $token = $user->createToken('token-name')->plainTextToken;
             $roles = $user->getRoleNames();
 
-            $identitas = $this->cekData($user->id);
-
-            $bayar = $this->cekBayar($user->id);
 
 
-            if($roles[0] == 'user'){
-                $tes = TesDiniyyah::where('user_id',$user->id)->first();
-                if(is_null($tes)){
-                    $dataTes = null;
-                $dataKelulusan = null;
-                }else{
-                    $dataKelulusan = $tes->kelulusan;
-                    $dataTes = $tes->status;
-                }
 
-            }else{
-                $dataTes = null;
-                $dataKelulusan = null;
-            }
 
 
             return response()->json([
@@ -235,10 +247,7 @@ class AuthController extends Controller
                 'user'        => $user,
                 'role'        => $roles,
                 'token'       => $token,
-                'identitas'   => $identitas,
-                'pendaftaran' => $bayar,
-                'kelulusan'   => $dataKelulusan,
-                'statusTes' => $dataTes
+
             ], 200);
         }
     }

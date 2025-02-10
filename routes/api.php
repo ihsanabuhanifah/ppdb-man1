@@ -40,6 +40,7 @@ Route::get('/login', function () {
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class, 'register']);
 Route::get('/getJadwal', [UserController::class, "getJadwal"]);
+
 Route::get('/device-update/{id}', [UserController::class, "device"]);
 Route::post("/sendRequestJadwal", [WaControllers::class, "sendBikinJadwal"]);
 Route::post("/sendKepastian", [WaControllers::class, "sendKepastian"]);
@@ -51,6 +52,8 @@ Route::get('/resetpassword/{email}', [UserController::class, "resetPassword"]);
 Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('/authme', [AuthController::class ,'authMe']);
 // tes mail
+Route::put('/update-profile', [UserController::class, "updateProfile"]);
+Route::get('/detail', [UserController::class, "detail"]);
 Route::get('/tesMail/{email}', [AuthController::class ,'tesMail']);
 //Fitur admin
  Route::middleware('role:admin')->group(function () {

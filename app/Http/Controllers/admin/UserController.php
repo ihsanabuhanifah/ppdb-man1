@@ -113,6 +113,19 @@ class UserController extends Controller
         ]);
     }
 
+
+    public function detail()
+    {
+
+        $users = User::where('id', Auth::user()->id)->first();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'sukses menampilkan data',
+            'data' => $users
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -137,6 +150,103 @@ class UserController extends Controller
      * @param  \App\Models\Managemen  $managemen
      * @return \Illuminate\Http\Response
      */
+
+     public function updateProfile(Request $request)
+     {
+        $user = User::where('id', Auth::user()->id)->first();
+
+$user->update([
+    'name' => $request->name,
+    'email' => $request->email,
+    'phone' => $request->phone,
+
+
+    // Data Pribadi
+    'jenis_kelamin' => $request->jenis_kelamin,
+    'nisn' => $request->nisn,
+    'nik' => $request->nik,
+    'tempat_lahir' => $request->tempat_lahir,
+    'tanggal_lahir' => $request->tanggal_lahir,
+    'agama' => $request->agama,
+    'anak_ke' => $request->anak_ke,
+    'jumlah_saudara_kandung' => $request->jumlah_saudara_kandung,
+    'asal_sekolah' => $request->asal_sekolah,
+    'jenis_sekolah' => $request->jenis_sekolah,
+    'hobi' => $request->hobi,
+    'cita_cita' => $request->cita_cita,
+
+    // Alamat
+    'alamat' => $request->alamat,
+    'rt' => $request->rt,
+    'rw' => $request->rw,
+    'desa' => $request->desa,
+    'kecamatan' => $request->kecamatan,
+    'kodepos' => $request->kodepos,
+    'tempat_tinggal' => $request->tempat_tinggal,
+    'transportasi' => $request->transportasi,
+
+    // Data Orang Tua
+    'nomor_kk' => $request->nomor_kk,
+    'nama_ayah' => $request->nama_ayah,
+    'tempat_lahir_ayah' => $request->tempat_lahir_ayah,
+    'tanggal_lahir_ayah' => $request->tanggal_lahir_ayah,
+    'nik_ayah' => $request->nik_ayah,
+    'pendidikan_ayah' => $request->pendidikan_ayah,
+    'pekerjaan_ayah' => $request->pekerjaan_ayah,
+    'penghasilan_ayah' => $request->penghasilan_ayah,
+    'nomor_ayah' => $request->nomor_ayah,
+
+    'kab_kota' => $request->kab_kota,
+    'provinsi'=> $request->provinsi,
+
+    'nama_ibu' => $request->nama_ibu,
+    'tempat_lahir_ibu' => $request->tempat_lahir_ibu,
+    'tanggal_lahir_ibu' => $request->tanggal_lahir_ibu,
+    'nik_ibu' => $request->nik_ibu,
+    'pendidikan_ibu' => $request->pendidikan_ibu,
+    'pekerjaan_ibu' => $request->pekerjaan_ibu,
+    'penghasilan_ibu' => $request->penghasilan_ibu,
+    'nomor_ibu' => $request->nomor_ibu,
+
+    // Data Wali
+    'nama_wali' => $request->nama_wali,
+    'tahun_lahir_wali' => $request->tahun_lahir_wali,
+    'nik_wali' => $request->nik_wali,
+    'pendidikan_wali' => $request->pendidikan_wali,
+    'pekerjaan_wali' => $request->pekerjaan_wali,
+    'penghasilan_wali' => $request->penghasilan_wali,
+    'nomor_wali' => $request->nomor_wali,
+
+    // Kartu Identitas
+    'nomor_kks' => $request->nomor_kks,
+    'nomor_pkh' => $request->nomor_pkh,
+    'nomor_kip' => $request->nomor_kip,
+    'foto_profile' => $request->foto_profile ?? $user->foto_profile,
+    'foto_kks' => $request->foto_kks ?? $user->foto_kks,
+    'foto_pkh' => $request->foto_pkh ?? $user->foto_pkh,
+    'foto_kip' => $request->foto_kip ?? $user->foto_kip,
+]);
+
+return response()->json([
+    "status" => "success",
+    "message" => 'Berhasil Menyimpan Data'
+]);
+
+
+         if($users->save()){
+             return response()->json([
+                 "status" => "success",
+                 "message" => 'Berhasil Menyimpan Data'
+             ]);
+         }else{
+             return response()->json([
+                 "status" => "failed",
+                 "message" => 'Gagal Menyimpan Data'
+             ]);
+         }
+     }
+
+
     public function update(Request $request, $id)
     {
         $users = User::where('id', $id)->first();

@@ -37,6 +37,7 @@ class User extends Authenticatable
         'anak_ke',
         'jumlah_saudara_kandung',
         'asal_sekolah',
+        'jenis_sekolah',
         'alamat',
         'desa',
         'kecamatan',
@@ -61,6 +62,24 @@ class User extends Authenticatable
         'pekerjaan_wali',
         'penghasilan_wali',
         'nomor_wali',
+        'hobi',
+        "cita_cita",
+        "rt", "rw","nomor_kk", 'tempat_lahir_ayah', 'tanggal_lahir_ayah',
+        'tempat_lahir_ibu',
+        'tanggal_lahir_ibu',
+        'tahun_lahir_wali',
+        'nomor_kks',
+        'nomor_pkh',
+        'nomor_kip',
+        'foto_profile',
+        'foto_kks',
+        'foto_pkh',
+        'foto_kip',
+        "kab_kota",
+        "provinsi",
+        "is_lulus" ,
+        "is_tes"
+
 
     ];
 
