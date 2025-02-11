@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\{
     User,
@@ -760,4 +761,38 @@ Panitia PPDB SMK MADINATULQURAN";
             'data' => $users
         ]);
     }
+
+
+
+
+    public function jumlahPendaftaran()
+{
+    $jenisSekolahList = ['SMP', 'MTs', 'PKBM', 'PDF Wustha', 'PPS SPQ'];
+
+    $jumlahPendaftaran = User::select('jenis_sekolah', DB::raw('count(*) as total'))
+        ->whereNotNull('jenis_sekolah')
+        ->whereIn('jenis_sekolah', $jenisSekolahList)
+        ->groupBy('jenis_sekolah')
+        ->pluck('total', 'jenis_sekolah')
+        ->toArray();
+
+    // Menetapkan nilai default 0 untuk jenis sekolah yang tidak ada di database
+    $hasil = [];
+    $totalKeseluruhan = 0;
+
+    foreach ($jenisSekolahList as $jenis) {
+        $jumlah = $jumlahPendaftaran[$jenis] ?? 0;
+        $hasil[$jenis] = $jumlah;
+        $totalKeseluruhan += $jumlah;
+    }
+
+    // Menambahkan total keseluruhan
+    $hasil['Total'] = $totalKeseluruhan;
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $hasil
+    ]);
+}
+
 }

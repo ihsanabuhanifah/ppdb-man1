@@ -42,6 +42,9 @@ Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class, 'register']);
 Route::get('/getJadwal', [UserController::class, "getJadwal"]);
 
+Route::get('/jumlah-pendaftaran', [UserController::class, "jumlahPendaftaran"]);
+
+
 Route::get('/device-update/{id}', [UserController::class, "device"]);
 Route::post("/sendRequestJadwal", [WaControllers::class, "sendBikinJadwal"]);
 Route::post("/sendKepastian", [WaControllers::class, "sendKepastian"]);
