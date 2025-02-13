@@ -87,7 +87,7 @@ class CreateUsersTable extends Migration
             $table->string('foto_kks')->nullable();
             $table->string('foto_pkh')->nullable();
             $table->string('foto_kip')->nullable();
-            $table->string('is_lulus')->nullable();
+            $table->string('cd')->nullable();
             $table->string('is_tes')->nullable();
             $table->string('is_locked')->nullable();
 

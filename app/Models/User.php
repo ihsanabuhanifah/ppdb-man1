@@ -95,7 +95,9 @@ class User extends Authenticatable
         "juara_ke_1",
         "juara_ke_2",
         "juara_ke_3",
-        "dokumen_prestasi"
+        "dokumen_prestasi",
+        "gelombang",
+        "diperbaharui_oleh"
 
 
     ];

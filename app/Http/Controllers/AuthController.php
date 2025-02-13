@@ -180,6 +180,7 @@ class AuthController extends Controller
             'foto_kks' => $request->foto_kks,
             'foto_pkh' => $request->nomor_pkh,
             'foto_kip' => $request->foto_kip,
+            'gelombang' => 1,
         ]);
 
         if ($request->role == 2) {

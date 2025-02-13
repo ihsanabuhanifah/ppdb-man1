@@ -127,6 +127,19 @@ class UserController extends Controller
         ]);
     }
 
+
+    public function detailByAdmin($id)
+    {
+
+        $users = User::where('id', $id)->first();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'sukses menampilkan data',
+            'data' => $users
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
