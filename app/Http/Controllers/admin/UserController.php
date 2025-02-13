@@ -9,7 +9,7 @@ use App\Models\{
     TesDiniyyah,
     TesMasuk,
     calonSiswa,
-    WaControllers
+    WaControllers, Nilai
 };
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -29,6 +29,23 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+public function nilaiBerkas(Request $request) {
+    $user = Nilai::where('user_id', $request->id)->first();
+    $user->update([
+        'berkas_nilai' => $request->berkas_nilai,
+        'berkas_keterangan' => $request->berkas_keterangan,
+        'berkas_penilaian' => $request->berkas_penilaian,
+
+
+    ]);
+
+    return response()->json([
+        "status" => "success",
+        "message" => 'Penilaian Berkas Berhasil'
+    ]);
+}
+
     public function index(Request $request)
     {
         $request->page;
@@ -131,7 +148,7 @@ class UserController extends Controller
     public function detailByAdmin($id)
     {
 
-        $users = User::where('id', $id)->first();
+        $users = User::where('id', $id)->with('nilai')->first();
 
         return response()->json([
             'status' => 'success',
@@ -166,13 +183,22 @@ class UserController extends Controller
      */
 
      public function updateProfile(Request $request)
+
      {
-        $user = User::where('id', Auth::user()->id)->first();
+
+        if($request -> nama_admin != null){
+            $user = User::where('id', $request->id)->first();
+        }else{
+            $user = User::where('id', Auth::user()->id)->first();
+        }
+
+
 
 $user->update([
     'name' => $request->name,
     'email' => $request->email,
     'phone' => $request->phone,
+    'diperbaharui_oleh' => $request -> nama_admin,
 
 
     // Data Pribadi

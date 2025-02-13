@@ -10,7 +10,7 @@ class dataAyah extends Model
     use HasFactory;
 
     protected $table = "nilai";
-    protected $fillable = ["berkas", "berkas_nilai", "berkas_keteranga", "cbt_bacaan", "cbt_tajwid", "cbt_hafalan", "cbt_tulisan", "cbt_nilai", "cbt_keterangan", "cbt_penilaian","berkas_penilaian"];
+    protected $fillable = ['no_pendaftaran','no_peserta','nik_siswa','jadwal_tes','jenis_tes', 'user_id'];
     protected $keyType = 'string';
 
     public function nilai()

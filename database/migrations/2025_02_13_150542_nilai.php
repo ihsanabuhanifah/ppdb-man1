@@ -29,6 +29,7 @@ class Nilai extends Migration
             $table->string('cbt_keterangan')->nullable();
             $table->string('cbt_penilaian')->nullable();
             $table->string('berkas_penilaian')->nullable();
+            $table->string('nilai_akhir')->nullable();
             $table->timestamps();
         });
 

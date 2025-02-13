@@ -126,6 +126,10 @@ Route::get('/tesMail/{email}', [AuthController::class ,'tesMail']);
 
         //Wa
         Route::post('/wablastkouta',[WaControllers::class,'blasKouta']);
+
+        // Berkasi
+
+        Route::post('/berkas/{id}', [UserController::class, "nilaiBerkas"]);
      });
 
     //  Fitur User
