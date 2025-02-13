@@ -14,7 +14,9 @@ use App\Models\{
     prestasiBelajar,
     prestasiSmp,
     bukti,
-    TesDiniyyah
+    TesDiniyyah,
+    Nilai
+
 };
 use Validator;
 use Hash;
@@ -199,6 +201,8 @@ class AuthController extends Controller
         $user-> update([
             'nomor_pendaftaran' =>  $nomor_pendaftaran,
         ]);
+
+        Nilai::create(["user_id" => $user->id]);
 
         if($user -> save()){
             return response()->json([

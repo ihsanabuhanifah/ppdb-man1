@@ -121,6 +121,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function nilai()
+    {
+        return $this->hasOne(nilai::class);
+    }
+
     public function calonSiswa()
     {
         return $this->hasOne(calonSiswa::class);

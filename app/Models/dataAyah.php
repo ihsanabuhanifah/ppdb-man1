@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class dataAyah extends Model
 {
     use HasFactory;
-  
-    protected $table = "data_ayah";
-    protected $fillable = ['nik_ayah','user_id','name_ayah','tempat_lahir_ayah','tanggal_lahir_ayah','pekerjaan_ayah','nomor_telepon_ayah','penghasilan_ayah'];
+
+    protected $table = "nilai";
+    protected $fillable = ["berkas", "berkas_nilai", "berkas_keteranga", "cbt_bacaan", "cbt_tajwid", "cbt_hafalan", "cbt_tulisan", "cbt_nilai", "cbt_keterangan", "cbt_penilaian","berkas_penilaian"];
     protected $keyType = 'string';
 
-    public function calonSiswa()
+    public function nilai()
     {
-        return $this->belongsTo(calonSiswa::class);
+        return $this->belongsTo(nilai::class);
     }
 }
