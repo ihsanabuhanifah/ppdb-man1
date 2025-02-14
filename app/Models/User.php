@@ -123,7 +123,7 @@ class User extends Authenticatable
 
     public function nilai()
     {
-        return $this->hasOne(nilai::class);
+        return $this->hasOne(Nilai::class);
     }
 
     public function calonSiswa()

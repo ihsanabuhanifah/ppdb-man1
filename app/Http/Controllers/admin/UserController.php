@@ -12,7 +12,7 @@ use App\Models\{
     WaControllers,
 
 };
-use App\Models\Nilai;
+// use App\Models\Nilai;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\{
@@ -137,7 +137,7 @@ public function nilaiBerkas(Request $request) {
     public function detail()
     {
 
-        $users = User::where('id', Auth::user()->id)->first();
+        $users = User::where('id', Auth::user()->id)->with('nilai')->first();
 
         return response()->json([
             'status' => 'success',
@@ -150,7 +150,7 @@ public function nilaiBerkas(Request $request) {
     public function detailByAdmin($id)
     {
 
-        $users = User::where('id', $id)->first();
+        $users = User::where('id', $id)->with('nilai')->first();
 
         return response()->json([
             'status' => 'success',
