@@ -15,9 +15,11 @@ use App\Models\{
     prestasiSmp,
     bukti,
     TesDiniyyah,
-    Nilai
+
 
 };
+
+use App\Models\Nilai;
 use Validator;
 use Hash;
 use env;
