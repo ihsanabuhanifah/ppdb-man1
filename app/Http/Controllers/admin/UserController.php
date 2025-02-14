@@ -10,6 +10,7 @@ use App\Models\{
     TesMasuk,
     calonSiswa,
     WaControllers,
+    Nilai
 
 };
 // use App\Models\Nilai;
