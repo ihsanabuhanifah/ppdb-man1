@@ -57,7 +57,7 @@ public function nilaiBerkas(Request $request) {
                  });
         if ($request->keywords) {
             $users = $users->where('name','like', "%".strtolower($request->keywords)."%")
-            ->orWhere('email','like', "%".strtolower($request->keywords)."%");
+            ->orWhere('email','like', "%".strtolower($request->keywords)."%")->orWhere('nomor_pendaftaran','like', "%".strtolower($request->keywords)."%")->orWhere('nisn','like', "%".strtolower($request->keywords)."%");
         }
 
         if ($request->tahun_ajar) {
