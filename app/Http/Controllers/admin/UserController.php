@@ -135,7 +135,7 @@ public function nilaiBerkas(Request $request) {
     public function detail()
     {
 
-        $users = User::where('id', Auth::user()->id)->first();
+        $users = User::where('id', Auth::user()->id)->with('nilai')->first();
 
         return response()->json([
             'status' => 'success',
