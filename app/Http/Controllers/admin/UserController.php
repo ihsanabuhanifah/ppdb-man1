@@ -9,7 +9,8 @@ use App\Models\{
     TesDiniyyah,
     TesMasuk,
     calonSiswa,
-    WaControllers, Nilai
+    WaControllers,
+    Nilai
 };
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
