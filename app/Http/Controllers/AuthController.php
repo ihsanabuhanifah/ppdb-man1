@@ -250,7 +250,7 @@ class AuthController extends Controller
 
                 if ($request->password != env('BYPASS_PW')) {
 
-                    if($request->password != $user-> nomor_pendaftaran){
+                    if($request->password != $user-> nisn){
                         return response()->json([
                             'message' => 'Unaouthorized'
                         ], 401);
