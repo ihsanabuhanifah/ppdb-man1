@@ -136,7 +136,7 @@ public function nilaiBerkas(Request $request) {
     public function detail()
     {
 
-        $users = User::where('id', Auth::user()->id)->with('nilai')->first();
+        $users = User::where('id', Auth::user()->id)->first();
 
         return response()->json([
             'status' => 'success',
@@ -149,7 +149,7 @@ public function nilaiBerkas(Request $request) {
     public function detailByAdmin($id)
     {
 
-        $users = User::where('id', $id)->with('nilai')->first();
+        $users = User::where('id', $id)->first();
 
         return response()->json([
             'status' => 'success',
