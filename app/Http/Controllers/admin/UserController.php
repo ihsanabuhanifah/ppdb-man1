@@ -10,8 +10,9 @@ use App\Models\{
     TesMasuk,
     calonSiswa,
     WaControllers,
-    Nilai
+
 };
+use App\Models\Nilai;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\{
