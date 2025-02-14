@@ -66,7 +66,7 @@ public function nilaiBerkas(Request $request) {
 
         $users = $users->orderBy("created_at", 'desc')
                 ->with('roles')
-
+                ->with("nilai")
                 ->paginate($request->perpage, ['users.*']);
 
         return response()->json([
@@ -77,6 +77,9 @@ public function nilaiBerkas(Request $request) {
             'data' => $users
         ]);
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
