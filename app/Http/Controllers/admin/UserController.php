@@ -194,11 +194,11 @@ public function nilaiBerkas(Request $request) {
 
 
 
-$user->update([
+$user->update(array_merge([
     'name' => $request->name,
     'email' => $request->email,
     'phone' => $request->phone,
-    'diperbaharui_oleh' => $request -> nama_admin,
+
 
 
     // Data Pribadi
@@ -279,7 +279,23 @@ $user->update([
     'tingkat1' => $request->tingkat1,
     'tingkat2' => $request->tingkat2,
     'tingkat3' => $request->tingkat3,
+], $request-> nama_admin ? [
+    'diperbaharui_oleh' => $request -> nama_admin,
+
+] : [] ));
+
+if($request->nama_admin) {
+    $nilai_cbt = Nilai::where("user_id", $request->id)-> first();
+    $nilai_cbt-> update(['cbt_bacaan' => $request -> cbt_bacaan,
+'cbt_tajwid' => $request -> cbt_tajwid,
+'cbt_hafalan' => $request -> cbt_hafalan,
+'cbt_tulisan' => $request -> cbt_tulisan,
+'cbt_nilai' => $request -> cbt_nilai,
+'cbt_keterangan' => $request -> cbt_keterangan,
+'cbt_penilaian' => $request -> cbt_penilaian,
 ]);
+}
+
 
 return response()->json([
     "status" => "success",
