@@ -12,7 +12,7 @@ use App\Models\{
     WaControllers,
 
 };
-// use App\Models\Nilai;
+use App\Models\Nilai;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\{
