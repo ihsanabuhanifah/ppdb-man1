@@ -10,7 +10,7 @@ use App\Models\{
     TesMasuk,
     calonSiswa,
     WaControllers,
-    Nilai
+    Nilai, Tes
 
 };
 // use App\Models\Nilai;
@@ -141,7 +141,7 @@ public function nilaiBerkas(Request $request) {
     public function detail()
     {
 
-        $users = User::where('id', Auth::user()->id)->with('nilai')->first();
+        $users = User::where('id', Auth::user()->id)->with(['nilai', 'tes'])->first();
 
         return response()->json([
             'status' => 'success',
@@ -154,7 +154,7 @@ public function nilaiBerkas(Request $request) {
     public function detailByAdmin($id)
     {
 
-        $users = User::where('id', $id)->with('nilai')->first();
+        $users = User::with(['nilai', 'tes'])->find($id);
 
         return response()->json([
             'status' => 'success',
@@ -855,5 +855,25 @@ Panitia PPDB SMK MADINATULQURAN";
         'data' => $hasil
     ]);
 }
+
+public function createTes($id, Request $request){
+   $tes = Tes::create([
+        'user_id' => $id,
+        'nilai_tes_akademik' => null,
+        'jawaban_tes_akademik' => '',
+        'nilai_tes_bidang_studi' => null,
+        'jawaban_tes_bidang_studi' => '',
+        'nilai_wawancara' => null,
+        'jawaban_wawancara' => "",
+    ]);
+
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $tes
+    ]);
+}
+
+
 
 }

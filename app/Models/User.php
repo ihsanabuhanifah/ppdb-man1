@@ -126,6 +126,11 @@ class User extends Authenticatable
         return $this->hasOne(Nilai::class);
     }
 
+    public function tes()
+    {
+        return $this->hasOne(Tes::class);
+    }
+
     public function calonSiswa()
     {
         return $this->hasOne(calonSiswa::class);

@@ -64,6 +64,7 @@ Route::get('/tesMail/{email}', [AuthController::class ,'tesMail']);
  Route::middleware('role:admin')->group(function () {
         // User crud
         Route::resource('user', UserController::class);
+        Route::post('tes/{id}', [UserController::class,'createTes']);
 
         Route::delete('user', [UserController::class, "destroy"]);
         Route::get('users/updateStatus/{id}', [UserController::class, "updateStatus"]);
@@ -134,6 +135,10 @@ Route::get('/tesMail/{email}', [AuthController::class ,'tesMail']);
 
     //  Fitur User
      Route::middleware('role:user')->group(function () {
+
+        Route::put('nilai/tpa', [TesDiniyyahController::class, "tesTPA"]);
+        Route::put('nilai/studi', [TesDiniyyahController::class, "tesStudi"]);
+        Route::put('nilai/wawancara', [TesDiniyyahController::class, "wawancara"]);
         Route::prefix('dataSiswa')->group(function () {
             Route::post('save', [CalonSiswaController::class, "saveData"]);
             Route::get('detail', [CalonSiswaController::class, "showData"]);

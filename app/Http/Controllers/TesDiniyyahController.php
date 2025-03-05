@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TesDiniyyah;
+use App\Models\Tes;
 use App\Models\calonSiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,46 @@ class TesDiniyyahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function tesTPA(Request $request){
+        $id = Auth::user()->id;
+        $tes = Tes::where('user_id', Auth::user()->id)->first();
+        $tes -> nilai_tes_akademik = $request->nilai_tes_akademik;
+        $tes -> jawaban_tes_akademik = $request->jawaban_tes_akademik;
+        $tes->save();
+
+        return response()->json([
+            "status" => "Success",
+            "message" => "Berhasil Mengkonfirmasi Pembayaran"
+        ]);
+    }
+
+
+    public function tesStudi(Request $request){
+        $id = Auth::user()->id;
+        $tes = Tes::where('user_id', Auth::user()->id)->first();
+        $tes -> nilai_tes_bidang_studi = $request->nilai_tes_bidang_studi;
+        $tes -> jawaban_tes_bidang_studi = $request->jawaban_tes_bidang_studi;
+        $tes->save();
+
+        return response()->json([
+            "status" => "Success",
+            "message" => "Berhasil Mengkonfirmasi Pembayaran"
+        ]);
+    }
+    public function wawancara(Request $request){
+        $id = Auth::user()->id;
+        $tes = Tes::where('user_id', Auth::user()->id)->first();
+        $tes -> nilai_wawancara = $request->nilai_wawancara;
+        $tes -> jawaban_wawancara = $request->jawaban_wawancara;
+        $tes->save();
+
+        return response()->json([
+            "status" => "Success",
+            "message" => "Berhasil Mengkonfirmasi Pembayaran"
+        ]);
+    }
     public function index()
     {
 
