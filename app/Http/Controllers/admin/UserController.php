@@ -876,4 +876,49 @@ public function createTes($id, Request $request){
 
 
 
+public function userLulus(Request $request){
+    $request->page;
+    $rolesss = [$request->role];
+
+    $users = User::whereHas('roles', function($q) use ($rolesss) {
+                $q->whereIn('name', $rolesss);
+             })
+             ->whereHas('tes', function($q) {
+                $q->whereNotNull('nilai_tes_akademik')
+                  ->whereNotNull('nilai_tes_bidang_studi')
+                  ->whereNotNull('nilai_wawancara');
+             })
+             ->whereHas('nilai', function($q) {
+                $q->where('cbt_penilaian', 'Telah Dites');
+             });
+
+    if ($request->keywords) {
+        $users = $users->where(function($q) use ($request) {
+            $q->where('name', 'like', "%".strtolower($request->keywords)."%")
+              ->orWhere('email', 'like', "%".strtolower($request->keywords)."%")
+              ->orWhere('nomor_pendaftaran', 'like', "%".strtolower($request->keywords)."%")
+              ->orWhere('nisn', 'like', "%".strtolower($request->keywords)."%");
+        });
+    }
+
+    if ($request->tahun_ajar) {
+        $users = $users->where('tahun_ajar', $request->tahun_ajar);
+    }
+
+    $users = $users->orderBy("created_at", 'desc')
+            ->with('roles')
+            ->with('nilai')
+            ->with('tes')
+            ->paginate($request->perpage, ['users.*']);
+
+    return response()->json([
+        'status' => 'success',
+        'perpage' => $request->perpage,
+        'role' => $request->role,
+        'message' => 'Sukses menampilkan data',
+        'data' => $users
+    ]);
+}
+
+
 }

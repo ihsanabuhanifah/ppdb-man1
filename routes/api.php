@@ -65,6 +65,7 @@ Route::get('/tesMail/{email}', [AuthController::class ,'tesMail']);
         // User crud
         Route::resource('user', UserController::class);
         Route::post('tes/{id}', [UserController::class,'createTes']);
+        Route::get('siswa/lulus', [UserController::class, "userLulus"]);
 
         Route::delete('user', [UserController::class, "destroy"]);
         Route::get('users/updateStatus/{id}', [UserController::class, "updateStatus"]);
