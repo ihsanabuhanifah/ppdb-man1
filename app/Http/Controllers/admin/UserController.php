@@ -921,4 +921,24 @@ public function userLulus(Request $request){
 }
 
 
+
+
+public function statistikPendaftar()
+{
+    $statistik = User::select('asal_sekolah', DB::raw('count(*) as jumlah'))
+                    ->groupBy('asal_sekolah')
+                    ->orderByDesc('jumlah')
+                    ->get();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Statistik jumlah pendaftar berdasarkan asal sekolah',
+        'data' => $statistik
+    ]);
 }
+
+
+}
+
+
+

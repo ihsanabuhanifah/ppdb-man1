@@ -66,6 +66,7 @@ Route::get('/tesMail/{email}', [AuthController::class ,'tesMail']);
         Route::resource('user', UserController::class);
         Route::post('tes/{id}', [UserController::class,'createTes']);
         Route::get('siswa/lulus', [UserController::class, "userLulus"]);
+        Route::get('sekolah/statistik', [UserController::class, "statistikPendaftar"]);
 
         Route::delete('user', [UserController::class, "destroy"]);
         Route::get('users/updateStatus/{id}', [UserController::class, "updateStatus"]);
