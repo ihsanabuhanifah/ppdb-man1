@@ -7,10 +7,18 @@ APP_URL=https://psb-api.smkmadinatulquran.sch.id/
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
 
+# DB_CONNECTION=mysql
+# DB_HOST=iix1350.idcloudhost.com
+# DB_PORT=3306
+# DB_DATABASE=qgzvmuhy_ppdb
+# DB_USERNAME=qgzvmuhy_ihsan
+# DB_PASSWORD=Hanifah@0207
+
+
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
+DB_HOST=localhost:8081
 DB_PORT=3308
-DB_DATABASE=man1
+DB_DATABASE=man1prod
 DB_USERNAME=root
 DB_PASSWORD=root
 
@@ -22,7 +30,7 @@ SESSION_DRIVER=database
 SESSION_LIFETIME=120
 
 MEMCACHED_HOST=127.0.0.1
-BYPASS_PW=@Smkbisa457
+BYPASS_PW=@man1sukabumi
 
 REDIS_HOST=127.0.0.1
 REDIS_PASSWORD=null

@@ -938,7 +938,55 @@ public function statistikPendaftar()
 }
 
 
+public function statistikLulusByJalur(Request $request)
+{
+    // Validasi role
+    $roles = [$request->role];
+
+    // Query dasar sama dengan userLulus
+    $baseQuery = User::whereHas('roles', function($q) use ($roles) {
+            $q->whereIn('name', $roles);
+         })
+         ->whereHas('tes', function($q) {
+            $q->whereNotNull('nilai_tes_akademik')
+              ->whereNotNull('nilai_tes_bidang_studi')
+              ->whereNotNull('nilai_wawancara');
+         })
+         ->whereHas('nilai', function($q) {
+            $q->where('cbt_penilaian', 'Telah Dites');
+         });
+
+    // Filter tahun ajar jika ada (sama dengan userLulus)
+    if ($request->tahun_ajar) {
+        $baseQuery->where('tahun_ajar', $request->tahun_ajar);
+    }
+
+    // Filter keywords jika ada (opsional, bisa ditambahkan jika diperlukan)
+
+    // Hitung jumlah per jalur seleksi
+    $statistik = [
+        'reguler' => (clone $baseQuery)->where('jalur_seleksi', 'Jalur Reguler')->count(),
+        'prestasi' => (clone $baseQuery)->where('jalur_seleksi', 'Jalur Prestasi')->count(),
+        'afirmasi' => (clone $baseQuery)->where('jalur_seleksi', 'Jalur Afirmasi')->count(),
+        'total' => (clone $baseQuery)->count()
+    ];
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Statistik pendaftar lulus berhasil diambil',
+        'data' => $statistik,
+
+
+    ]);
 }
+
+
+}
+
+
+
+
+
 
 
 
