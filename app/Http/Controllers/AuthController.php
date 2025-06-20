@@ -30,6 +30,13 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+
+
+         return response()->json([
+                'status' => 'Success',
+                'message' => 'pendaftaran online sudah tidak tersedia, hanya menerima pendaftaran offline (datanga langsung ke MAN 1 Kota Sukabumi) maksimal sampai 01 Juli 2025.',
+
+            ], 200);
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users,email',
