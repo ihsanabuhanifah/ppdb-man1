@@ -40,6 +40,7 @@ Route::get('/login', function () {
 });
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class, 'register']);
+Route::post('/register/admin',[AuthController::class, 'registerbyAdmin']);
 Route::get('/getJadwal', [UserController::class, "getJadwal"]);
 
 Route::get('/jumlah-pendaftaran', [UserController::class, "jumlahPendaftaran"]);
